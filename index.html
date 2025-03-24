@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Delights - Online Sweet Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff3e0;
+        }
+        header {
+            background-color: #ff6f61;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+        .items {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 250px;
+        }
+        .item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #e65c50;
+        }
+        #cart ul {
+            list-style: none;
+            padding: 0;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            width: 100%;
+            background-color: #ff6f61;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sweet Delights</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#cart">Cart</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <h2>Welcome to Sweet Delights</h2>
+        <p>Discover the finest sweets made with love and tradition.</p>
+    </section>
+    
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="items">
+            <div class="item">
+                <img src="https://source.unsplash.com/250x250/?gulab-jamun" alt="Gulab Jamun">
+                <h3>Gulab Jamun</h3>
+                <p>Rs. 150 per kg</p>
+                <button onclick="addToCart('Gulab Jamun', 150)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="https://source.unsplash.com/250x250/?rasgulla" alt="Rasgulla">
+                <h3>Rasgulla</h3>
+                <p>Rs. 200 per kg</p>
+                <button onclick="addToCart('Rasgulla', 200)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="https://source.unsplash.com/250x250/?jalebi" alt="Jalebi">
+                <h3>Jalebi</h3>
+                <p>Rs. 180 per kg</p>
+                <button onclick="addToCart('Jalebi', 180)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+    
+    <section id="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: Rs. <span id="total">0</span></p>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+    
+    <script>
+        let cart = [];
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCart();
+        }
+        function updateCart() {
+            let cartList = document.getElementById("cart-items");
+            let totalPrice = document.getElementById("total");
+            cartList.innerHTML = "";
+            let total = 0;
+            cart.forEach(({ item, price }) => {
+                let li = document.createElement("li");
+                li.textContent = `${item} - Rs. ${price}`;
+                cartList.appendChild(li);
+                total += price;
+            });
+            totalPrice.textContent = total;
+        }
+    </script>
+</body>
+</html>
